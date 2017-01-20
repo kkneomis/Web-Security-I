@@ -27,8 +27,10 @@ Structure Query Language (SQL) is used to many developers to insert and retrieve
 select * users where name='Simeon'
 ```
 This sql would statement simply pull my account information within a web application. In a web application, the developer might dynamically generate a sql statement based on the user input. 
+
+Suppose the developer wanted to select users based on your input, the sql statement might look like this:
 ```sql
 select * users where name=[NAME]
 ```
-
+The problem with this is you (you sneaky person you ;] ) might try to enter a value to break that sql statement or use it to extract more information the database than you are entitled to (usernames, passwords, ssn numbers, etc...).
 
