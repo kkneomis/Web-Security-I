@@ -44,10 +44,13 @@ This is because you have broken the dynamic sql statement was supposed to be gen
 ```
 select * from movie where title=' + [YOUR INPUT] + '
 ```
-By inputing a single quote, or anything followed by a single quote, you break the sql statement because it now has too many quotes. Suppose you entered "iron man'", then the resulting sql statement would be:
+I can tell by looking at the url ;). By inputing a single quote, or anything followed by a single quote, you break the sql statement because it now has too many quotes. Suppose you entered "iron man'", then the resulting sql statement would be:
 ```
 select * from movie where title='iron man''
 ```
 That's one quote too many! And sql being picky with syntax has no idea how to interpret that. If you ever get this result on any website, you are clear to wreak havoc (at your own risk, of course).
+ 
+For this next section, we'll switch from using the input field to messing with the url of the page. This will work because the input if being submitted though a GET request. Go ahead and give it a try! Instead of search using the input box, just replace everything after the "?title=" in the url with your search term. You should get the same results as using the search box. 
 
+First, we'll try to guess how many tables are in database!
 
