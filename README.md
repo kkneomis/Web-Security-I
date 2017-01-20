@@ -30,7 +30,24 @@ This sql would statement simply pull my account information within a web applica
 
 Suppose the developer wanted to select users based on your input, the sql statement might look like this:
 ```sql
-select * users where name=[NAME]
+select * users where name='[NAME]'
 ```
-The problem with this is you (you sneaky person you ;] ) might try to enter a value to break that sql statement or use it to extract more information the database than you are entitled to (usernames, passwords, ssn numbers, etc...).
+The problem with this is that you (you sneaky person you ;] ) might try to enter a value to break that sql statement or use it to extract more information from the database than you are entitled to (usernames, passwords, ssn numbers, etc...).
+
+Let's start with the bwapp SQL Injection (Search/GET) exercise.
+
+You should begin by playing around with the search box and entering various values to see what happens. If you simply press enter, all the movies are returned. However, if you enter a single quote ', you get the following error
+```
+Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%'' at line 1
+```
+This is because you have broken the dynamic sql statement was supposed to be generated from your input (congratulations on being a bAd@$$-H@CK3R!). We can assume the sequel statement looked something like this:
+```
+select * from movie where title=' + [YOUR INPUT] + '
+```
+By inputing a single quote, or anything followed by a single quote, you break the sql statement because it now has too many quotes. Suppose you entered "iron man'", then the resulting sql statement would be:
+```
+select * from movie where title='iron man''
+```
+That's one quote too many! And sql being picky with syntax has no idea how to interpret that. If you ever get this result on any website, you are clear to wreak havoc (at your own risk, of course).
+
 
