@@ -52,7 +52,7 @@ That's one quote too many! And sql being picky with syntax has no idea how to in
  
 For this next section, we'll switch from using the input field to messing with the url of the page. This will work because the input is being submitted though a GET request. Go ahead and give it a try! Instead of search using the input box, just replace everything after the "?title=" in the url with your search term. You should get the same results as using the search box. 
 
-First, we'll try to guess how many tables are in database!
+###First, we'll try to guess how many tables are in database!
 
 We can achieve this using sql's ORDER BY command. You can use it like so:
 ```
@@ -67,3 +67,5 @@ The "-- -" is the SQL syntax for commenting. We want to negate anything that com
 You should get an error from the command above. Since we will always get an error if we order by more than the number of tables that exist, we can keep trying it with a small number until we no longer get an error. At that point we will know how many tables exist in the database. 
 
 If you order order by any number less than 7, you should no longer have an error. Instead, it should say "No movies were found!". Great! We'll use this information going forward.
+
+
