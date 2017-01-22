@@ -1,4 +1,4 @@
-##SQL Injection
+#SQL Injection
 Structured Query Language (SQL) is used to many developers to insert and retrieve information from a common relational database. Whenever you see a website that does more than just display static information (i.e. letting users make posts or create accounts) it is most likely using a database. Most Wordpress sites run on SQL databases. The standard SQL command looks like this:
 ```sql
 select * users where name='Simeon'
