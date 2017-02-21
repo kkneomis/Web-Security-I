@@ -1,15 +1,15 @@
 #SQL Injection
-Structured Query Language (SQL) is used to many developers to insert and retrieve information from a common relational database. Whenever you see a website that does more than just display static information (i.e. letting users make posts or create accounts) it is most likely using a database. Most Wordpress sites run on SQL databases. The standard SQL command looks like this:
+Structured Query Language (SQL) is used by many developers to insert and retrieve information from a common relational database. Whenever you see a website that does more than just display static information (i.e. letting users make posts or create accounts) it is most likely using a database. Most Wordpress sites run on SQL databases. The standard SQL command looks like this:
 ```sql
 select * users where name='Simeon'
 ```
-This sql would statement simply pull my account information within a web application. In a web application, the developer might dynamically generate a sql statement based on the user input. 
+This sql statement would simply pull my account information within a web application. In a web application, the developer might dynamically generate a sql statement based on the user input. 
 
 Suppose the developer wanted to select users based on your input, the sql statement might look like this:
 ```sql
-select * users where name='[NAME]'
+select * users where name='+[NAME]+'
 ```
-The problem with this is that you (you sneaky person you ;] ) might try to enter a value to break that sql statement or use it to extract more information from the database than you are entitled to (usernames, passwords, ssn numbers, etc...).
+The problem with this is that you might try to enter a value to break that sql statement or use it to extract more information from the database than you are entitled to (usernames, passwords, ssn numbers, etc...).
 
 Let's start with the bwapp SQL Injection (Search/GET) exercise.
 
@@ -18,7 +18,7 @@ You should begin by playing around with the search box and entering various valu
 Error: You have an error in your SQL syntax; check the manual that corresponds to your
 MySQL server version for the right syntax to use near '%'' at line 1
 ```
-This is because you have broken the dynamic sql statement was supposed to be generated from your input (congratulations on being a bAd@$$-H@CK3R!). We can assume the sequel statement looked something like this:
+This is because you have broken the dynamic sql statement was supposed to be generated from your input. We can assume the SQL statement looked something like this:
 ```
 select * from movie where title=' + [YOUR INPUT] + '
 ```
@@ -28,9 +28,9 @@ select * from movie where title='iron man''
 ```
 That's one quote too many! And sql being picky with syntax has no idea how to interpret that. If you ever get this result on any website, you are clear to wreak havoc (at your own risk, of course).
  
-For this next section, we'll switch from using the input field to messing with the url of the page. This will work because the input is being submitted though a GET request. Go ahead and give it a try! Instead of search using the input box, just replace everything after the "?title=" in the url with your search term. You should get the same results as using the search box. 
+For this next section, we'll switch from using the input field to messing with the url of the page. This will work because the input is being submitted though a GET request. Go ahead and give it a try! Instead of searching using the input box, just replace everything after the "?title=" in the url with your search term. You should get the same results as using the search box. 
 
-###First, we'll try to guess how many tables are in database!
+###First, we'll try to guess how many tables are in the database!
 
 We can achieve this using sql's ORDER BY command. You can use it like so:
 ```
@@ -40,7 +40,7 @@ First we should recognize that the sql command outputed from like probably looks
 ```
 select * from movie where title='1' ORDER BY 99-- -
 ```
-The "-- -" is the SQL syntax for commenting. We want to negate anything that comes after our input so we can be sure about the command's behavior. 
+The "-- " is the SQL syntax for commenting. We want to negate anything that comes after our input so we can be sure about the command's behavior. 
 
 You should get an error from the command above. Since we will always get an error if we order by more than the number of tables that exist, we can keep trying it with a small number until we no longer get an error. At that point we will know how many tables exist in the database. 
 
